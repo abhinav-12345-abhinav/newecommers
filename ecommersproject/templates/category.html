@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+     {% if category %}
+          {{ category.description|truncatewords:155 }}
+     {% else %}
+          Welcome to AK store where you can buys different items......
+     {% endif %}
+{% endblock %}
+{% block title %}
+     {% if category %}
+          {{ category.name }} - AK store
+     {% else %}
+            see our new collection - AK store
+     {% endif %}
+     {% endblock %}
+
+{% block condent %}
+{% if category %}
+
+<div>
+   <div>
+     <p><a href="{% url 'shop:allProdCat' %}">Our Product collections</a></p>
+   </div>
+ </div>
+  {% endif %}
+<div>
+      {% if category %}
+      <img src="{{category.image.url}}" alt="{{category.name}}">
+</div>
+  <br>
+<div>
+      <h1>{{category.name}}</h1>
+      <p>{{category.description}}</p>
+</div>
+      {% else %}
+<div>
+     <img src="{% static 'img/banner.png' %}" alt="Our products" width="1250px;">
+</div>
+<br>
+<div>
+        <h1>Our products Collections</h1>
+        <p>hai how are you</p>
+      </div>
+      {% endif %}
+<div>
+    <div>
+        {% for product in products %}
+          <div>
+              <div>
+                  <a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+                   <div>
+                       <h4>{{product.name}}</h4>
+                       <p>{{product.price}}</p>
+                   </div>
+              </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
